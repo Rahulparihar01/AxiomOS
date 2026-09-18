@@ -1,0 +1,4 @@
+[console_scripts]
+aios = aios.cli:main
+axiom = aios.cli:main
+axiomos = aios.cli:main

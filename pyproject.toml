@@ -1,0 +1,77 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "axiomos"
+version = "1.0.0"
+description = "AxiomOS: The Deterministic Control Plane for Autonomous Agents"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "AxiomOS Core Team" }
+]
+keywords = [
+    "ai",
+    "agents",
+    "operating-system",
+    "deterministic",
+    "control-plane",
+    "microkernel",
+    "llm",
+    "mcp",
+    "model-context-protocol",
+    "orchestration"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Application Frameworks",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "pydantic>=2.7.0",
+    "python-dotenv>=1.0.1",
+    "rich>=13.7.0",
+    "httpx>=0.27.0",
+    "fastapi>=0.111.0",
+    "uvicorn>=0.30.0",
+    "websockets>=12.0",
+    "python-multipart>=0.0.9",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+]
+
+[project.scripts]
+axiom = "aios.cli:main"
+axiomos = "aios.cli:main"
+aios = "aios.cli:main"
+
+[tool.setuptools]
+py-modules = ["cli", "demo"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = [
+    "kernel*",
+    "agents*",
+    "config*",
+    "ipc*",
+    "memory*",
+    "models*",
+    "sandbox*",
+    "security*",
+    "server*",
+    "syscalls*",
+    "aios*",
+    "axiom*",
+    "axiomos*",
+]

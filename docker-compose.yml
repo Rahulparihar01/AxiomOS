@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  ai-os:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: aios-control-plane
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - AIOS_LOG_LEVEL=INFO
+      - DEFAULT_PROVIDER=${DEFAULT_PROVIDER:-mock}
+      - MODEL_NAME=${MODEL_NAME:-gemini-1.5-flash}
+      - AIOS_ADMIN_TOKEN=${AIOS_ADMIN_TOKEN:-}
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - DEFAULT_TOKEN_BUDGET=50000
+      - DEFAULT_MAX_STEPS=15
+      - DEFAULT_WORKERS=4
+      - EMBEDDING_PROVIDER=${EMBEDDING_PROVIDER:-hash}
+      - SANDBOX_BACKEND=${SANDBOX_BACKEND:-local}
+    volumes:
+      - aios-data:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  aios-data:
+    driver: local
